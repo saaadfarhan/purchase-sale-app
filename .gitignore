@@ -1,0 +1,10 @@
+build/
+build-windows/
+*.class
+*.jar
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+purchase-sale-office-windows-handover.zip
+.idea/
+*.iml
