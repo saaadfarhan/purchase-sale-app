@@ -1,6 +1,6 @@
 # Purchase Sale Office
 
-Screenshot-derived desktop prototype for the legacy purchase/sale office.
+Desktop software for managing purchases, sales, inventory, and accounts, currently being prepared for office testing.
 
 ## Run
 
