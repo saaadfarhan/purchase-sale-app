@@ -18,6 +18,8 @@ export type Dashboard = {
 export type OfficeUser = { username: string; permissions: string[] }
 export type AuditEvent = { eventTime: string; username: string; action: string; details: string }
 export type OfficeSession = { username: string; permissions: string[] }
+export type OfficeConnection = { mode: 'local' | 'remote'; url?: string; fingerprint?: string }
+export type OfficeServerInfo = { urls: string[]; fingerprint: string; port: number }
 export type DatabaseVerification = { ok: boolean; integrity: string[]; foreignKeyViolations: Array<Record<string, unknown>>; tableCounts: Record<string, number>; checkedAt: string }
 export type CompanyProfile = { name: string; address: string; phone: string; fiscalYear: string; logoPath: string }
 
@@ -29,6 +31,12 @@ export type OfficeBridge = {
     logout: () => Promise<void>
   }
   app: { quit: () => Promise<void>; menuAction: (action: 'reload' | 'forceReload' | 'devTools' | 'zoomIn' | 'zoomOut' | 'resetZoom' | 'minimize' | 'close' | 'fullscreen' | 'undo' | 'redo' | 'cut' | 'copy' | 'paste' | 'selectAll') => Promise<void> }
+  connection: {
+    get: () => Promise<OfficeConnection>
+    configureRemote: (value: { url: string; fingerprint: string }) => Promise<OfficeConnection>
+    useLocal: () => Promise<OfficeConnection>
+  }
+  server: { start: () => Promise<OfficeServerInfo>; stop: () => Promise<void>; status: () => Promise<OfficeServerInfo | null> }
   users: { list: () => Promise<OfficeUser[]>; save: (value: { username: string; password: string; permissions: string[] }) => Promise<OfficeUser>; remove: (username: string) => Promise<void> }
   audit: { list: () => Promise<AuditEvent[]> }
   database: {

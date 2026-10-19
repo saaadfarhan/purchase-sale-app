@@ -119,6 +119,15 @@ function createOfficeStore(db) {
     }))
   }
 
+  function getUserSession(username) {
+    const user = db.prepare('SELECT username, permissions FROM users WHERE username=?').get(String(username || '').trim())
+    if (!user) return null
+    return {
+      username: user.username,
+      permissions: normalizePermissions(user.permissions ? user.permissions.split('\u001f').filter(Boolean) : []),
+    }
+  }
+
   function saveUser(input) {
     const username = required(input.username, 'User name')
     if (username.length > 80) throw new Error('User name must be 80 characters or fewer')
@@ -184,6 +193,10 @@ function createOfficeStore(db) {
   function setCurrentUser(username) {
     currentUser = username || 'system'
     if (username) recordAudit('LOGOUT', username)
+  }
+
+  function setAuditActor(username) {
+    currentUser = username || 'system'
   }
 
   function auditEvents() {
@@ -683,7 +696,7 @@ function createOfficeStore(db) {
     listVouchers, saveVoucher: (input) => saveVoucherTransaction(input), deleteVoucher, getVoucherType,
     listCheques, saveCheque, deleteCheque: (number) => deleteChequeTransaction(number),
     getChallanType: (number) => db.prepare('SELECT type FROM challans WHERE number=?').get(number)?.type ?? null,
-    listUsers, saveUser, deleteUser, authenticate, createFirstUser, setCurrentUser, auditEvents,
+    listUsers, getUserSession, saveUser, deleteUser, authenticate, createFirstUser, setCurrentUser, setAuditActor, auditEvents,
     hasUsers: () => Boolean(db.prepare('SELECT 1 FROM users LIMIT 1').get()),
     getStockTypes: listStockTypes,
   }

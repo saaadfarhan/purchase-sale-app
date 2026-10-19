@@ -13,6 +13,16 @@ contextBridge.exposeInMainWorld('office', Object.freeze({
     quit: () => invoke('app:quit'),
     menuAction: (action) => invoke('app:menu-action', action),
   },
+  connection: {
+    get: () => invoke('connection:get'),
+    configureRemote: (value) => invoke('connection:configure-remote', value),
+    useLocal: () => invoke('connection:use-local'),
+  },
+  server: {
+    start: () => invoke('server:start'),
+    stop: () => invoke('server:stop'),
+    status: () => invoke('server:status'),
+  },
   users: {
     list: () => invoke('users:list'),
     save: (value) => invoke('users:save', value),
