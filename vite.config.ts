@@ -12,4 +12,16 @@ export default defineConfig({
   resolve: { alias: { "@": path.resolve(root, "src") } },
   clearScreen: false,
   server: { host: "127.0.0.1", port: 5173, strictPort: true },
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            { name: "react-vendor", test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/, priority: 20 },
+            { name: "vendor", test: /node_modules[\\/]/, maxSize: 300_000, priority: 10 },
+          ],
+        },
+      },
+    },
+  },
 })

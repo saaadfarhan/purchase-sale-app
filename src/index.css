@@ -133,28 +133,30 @@
 }
 
 .print-root { display: none; }
+.print-sheet { color: #111; background: #fff; font: 10pt/1.4 Arial, sans-serif; }
+.print-preview-sheet { box-sizing: border-box; width: min(210mm, 100%); min-height: 297mm; margin-inline: auto; padding: 16mm; box-shadow: 0 2px 14px rgb(0 0 0 / 14%); }
+.print-company { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px 16px; border-bottom: 2px solid #222; padding-bottom: 12px; }
+.print-brand { display: flex; min-width: 0; align-items: center; gap: 12px; }
+.print-logo { display: block; flex: 0 1 auto; width: auto; max-width: 24mm; height: auto; max-height: 22mm; object-fit: contain; }
+.print-company-copy { min-width: 0; }
+.print-company h1 { margin: 0 0 3px; font-size: 18pt; overflow-wrap: anywhere; }
+.print-company-details { display: flex; flex-wrap: wrap; gap: 2px 12px; color: #444; }
+.print-company-details span { max-width: 100%; overflow-wrap: anywhere; }
+.print-date { max-width: 38mm; margin: 1px 0; color: #555; font-size: 8pt; text-align: right; overflow-wrap: anywhere; }
+.print-document-heading { margin: 18px 0 12px; text-align: center; }
+.print-document-heading h2 { margin: 0; font-size: 15pt; text-transform: uppercase; }
+.print-document-heading p { margin: 3px 0 0; color: #444; }
+.print-table { width: 100%; border-collapse: collapse; }
+.print-table th, .print-table td { border: 1px solid #999; padding: 6px 7px; text-align: left; vertical-align: top; }
+.print-table td { overflow-wrap: anywhere; }
+.print-table th { background: #eee; font-weight: 700; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.print-table tr { break-inside: avoid; }
+.print-total { margin-top: 12px; text-align: right; font-size: 12pt; }
+.print-footer { margin-top: 22px; border-top: 1px solid #aaa; padding-top: 6px; color: #555; font-size: 8pt; }
 @media print {
   @page { size: A4 portrait; margin: 16mm; }
   body.printing-document { background: white !important; color: #111 !important; }
-  body.printing-document #root { display: none !important; }
+  body.printing-document > :not(#print-root) { display: none !important; }
   body.printing-document #print-root { display: block !important; }
-  body.printing-document .print-sheet { display: block; color: #111; font: 10pt/1.4 Arial, sans-serif; }
-  body.printing-document .print-company { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px 16px; border-bottom: 2px solid #222; padding-bottom: 12px; }
-  body.printing-document .print-brand { display: flex; min-width: 0; align-items: center; gap: 12px; }
-  body.printing-document .print-logo { display: block; flex: 0 1 auto; width: auto; max-width: 24mm; height: auto; max-height: 22mm; object-fit: contain; }
-  body.printing-document .print-company-copy { min-width: 0; }
-  body.printing-document .print-company h1 { margin: 0 0 3px; font-size: 18pt; overflow-wrap: anywhere; }
-  body.printing-document .print-company-details { display: flex; flex-wrap: wrap; gap: 2px 12px; color: #444; }
-  body.printing-document .print-company-details span { max-width: 100%; overflow-wrap: anywhere; }
-  body.printing-document .print-date { max-width: 38mm; margin: 1px 0; color: #555; font-size: 8pt; text-align: right; overflow-wrap: anywhere; }
-  body.printing-document .print-document-heading { margin: 18px 0 12px; text-align: center; }
-  body.printing-document .print-document-heading h2 { margin: 0; font-size: 15pt; text-transform: uppercase; }
-  body.printing-document .print-document-heading p { margin: 3px 0 0; color: #444; }
-  body.printing-document .print-table { width: 100%; border-collapse: collapse; }
-  body.printing-document .print-table th, body.printing-document .print-table td { border: 1px solid #999; padding: 6px 7px; text-align: left; vertical-align: top; }
-  body.printing-document .print-table td { overflow-wrap: anywhere; }
-  body.printing-document .print-table th { background: #eee !important; font-weight: 700; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body.printing-document .print-table tr { break-inside: avoid; }
-  body.printing-document .print-total { margin-top: 12px; text-align: right; font-size: 12pt; }
-  body.printing-document .print-footer { margin-top: 22px; border-top: 1px solid #aaa; padding-top: 6px; color: #555; font-size: 8pt; }
+  body.printing-document .print-sheet { display: block; }
 }
