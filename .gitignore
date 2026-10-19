@@ -1,5 +1,8 @@
 build/
 build-windows/
+build-electron/
+dist/
+node_modules/
 *.class
 *.jar
 *.sqlite
